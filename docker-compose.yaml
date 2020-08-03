@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  scraper:
+    build:
+      context: .
+    volumes:
+      - ./scraper-data/:/scraper-data
+    # use network_mode so the container can connect to local database
+    network_mode: "host"
+    container_name: recipe-scraper
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_DB: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    tty: true
